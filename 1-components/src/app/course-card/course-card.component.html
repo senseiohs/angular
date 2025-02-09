@@ -1,5 +1,7 @@
-<div class="course-card">
-  <div class="course-title">{{ index + " " + course.description }}</div>
+<div class="course-card" [ngClass]="onSetCardClasses()">
+  <div class="course-title" [ngStyle]="onSetCardStyle()">
+    {{ index + " " + course.description }}
+  </div>
 
   @if(course.id == 1){
   <h2>The Course is the first</h2>
@@ -9,8 +11,15 @@
   <h2>No image available</h2>
   }
 
-  <div class="course-description">
+  <div
+    class="course-description"
+    *ngIf="course.longDescription; else noDescription"
+  >
     {{ course.longDescription }}
   </div>
+  <ng-template #noDescription>
+    <h2>No Description Available</h2>
+  </ng-template>
+
   <button (click)="onCourseViewed()">Print Message</button>
 </div>
