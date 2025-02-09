@@ -22,8 +22,13 @@
   }
   <!-- Iteraction Odd way -->
   <!-- <course-card
-    *ngFor="let course of courses"
+    *ngFor="let course of courses; index as i; first as isFirst;last as isLast; even as isEven; odd as isOdd"
     [course]="course"
+    [index]="i + 1"
+    [class.is-first]="isFirst"
+    [class.is-last]="isLast"
+    [class.is-odd]="isOdd"
+    [class.is-even]="isEven"
     (courseSelected)="onCourseSelected($event)"
   ></course-card> -->
 </div>
