@@ -97,10 +97,10 @@ export const COURSES: any = [
   },
   {
     id: 11,
-    description: "Angular 11 Component Patterns",
+    description: "Artificial Intelligence",
     iconUrl:
       "https://s3-us-west-1.amazonaws.com/angular-university/course-images/material_design.png",
-    category: "ADVANCED",
+    category: "UNKNOW",
   },
 ];
 
