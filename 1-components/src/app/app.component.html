@@ -5,6 +5,30 @@
     alt="Angular Academy logo"
   />
 </div>
+<ng-container class="courses">
+  <div>
+    <h3>Date Format</h3>
+    <p>Start Date: {{ startDate | date }}</p>
+  </div>
+  <div>
+    <h3>Percent</h3>
+    <p>Total Coffe Export: {{ totalCoffeExport | percent }}</p>
+  </div>
+  <div>
+    <h3>Currency</h3>
+    <p>Salary of Charlie: {{ salary | currency : "EUR" }}</p>
+  </div>
+  <div>
+    <h3>Decimal</h3>
+    <p>Amount electrocity in blood: {{ amountEletrocit | number : "2.0-3" }}</p>
+  </div>
+  <div>
+    <h3>Key Values</h3>
+    <div *ngFor="let pair of courses[0] | keyvalue">
+      {{ pair.key + ": " + pair.value }}
+    </div>
+  </div>
+</ng-container>
 
 <div class="courses">
   @for (course of courses; track course.id; let index = $index; let count =
