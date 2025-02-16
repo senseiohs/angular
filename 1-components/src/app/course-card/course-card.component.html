@@ -12,6 +12,9 @@
     <h2>No image available</h2>
     }
 
+    <!-- This component we use for content projection to send me from view parent component -->
+    <ng-content> </ng-content>
+
     <div
       class="course-description"
       *ngIf="course.longDescription; else noDescription"

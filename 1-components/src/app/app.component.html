@@ -6,7 +6,7 @@
   />
 </div>
 <ng-container class="courses">
-  <div>
+  <div #DateFormat>
     <h3>Date Format</h3>
     <p>Start Date: {{ startDate | date }}</p>
   </div>
@@ -29,6 +29,14 @@
     </div>
   </div>
 </ng-container>
+<course-card
+  #firtCard
+  [course]="courses[0]"
+  [index]="20"
+  (courseSelected)="onCourseSelected($event)"
+>
+  <h3>Projection Content from app-component into course-card</h3>
+</course-card>
 
 <div class="courses">
   @for (course of courses; track course.id; let index = $index; let count =
