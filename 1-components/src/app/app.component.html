@@ -5,6 +5,7 @@
     alt="Angular Academy logo"
   />
 </div>
+
 <ng-container class="courses">
   <div #DateFormat>
     <h3>Date Format</h3>
@@ -29,11 +30,32 @@
     </div>
   </div>
 </ng-container>
+
+<!-- 2. Probando el ng-template desde el componente principal
+<div class="courses" *ngIf="courses[0] as course">
+  <ng-template #blankImage let-courseName="description">
+    <p>{{ courseName }} has no image yet.</p>
+    <img src="../assets/empty-image.png" alt="Empty iconUrl" />
+  </ng-template>
+
+  <ng-container
+    *ngTemplateOutlet="blankImage; context: { description: course.description }"
+  >
+  </ng-container>
+</div> -->
+
+<!-- 3. Pasando el ng-template de imagen vacia al componente de course-card -->
+<ng-template #blankImage let-courseName="description">
+  <p class="warn">{{ courseName }} has no image yet.</p>
+  <img src="../assets/empty-image.png" alt="Empty iconUrl" />
+</ng-template>
+
 <course-card
   #firtCard
   [course]="courses[0]"
   [index]="20"
   (courseSelected)="onCourseSelected($event)"
+  [noImageTpl]="blankImage"
 >
   <h3>Projection Content from app-component into course-card</h3>
 </course-card>
@@ -50,6 +72,7 @@
     [class.is-odd]="odd"
     [class.is-even]="even"
     (courseSelected)="onCourseSelected($event)"
+    [noImageTpl]="blankImage"
   ></course-card>
   }
   <!-- Iteraction Odd way -->

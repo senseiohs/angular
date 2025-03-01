@@ -4,16 +4,44 @@
       {{ index + " " + course.description }}
     </div>
 
-    @if(course.id == 1){
+    <!-- @if(course.id == 1){
     <h2>The Course is the first</h2>
     } @else if (course.iconUrl) {
     <img width="300" alt="Angular Logo" [src]="course.iconUrl" />
     } @else {
     <h2>No image available</h2>
-    }
+    } -->
 
+    <!-- <img width="300" alt="Angular Logo" [src]="course.iconUrl" /> -->
     <!-- This component we use for content projection to send me from view parent component -->
     <ng-content> </ng-content>
+
+    <!-- 1. Progando el ng-template desde el componente -->
+    <!-- <ng-template #blankImage>
+      <p class="warn">No image is available yet.</p>
+      <img src="../../assets/empty-image.png" alt="Empty" />
+    </ng-template>
+    <ng-content
+      select="course-image"
+      *ngIf="course.iconUrl"
+      ;
+      else
+      blankImage
+    ></ng-content> -->
+
+    <!-- 3. Pasando el ng-template como parámetro al componente course-card -->
+    <ng-content select="course-image" *ngIf="course.iconUrl; else noImage">
+      <img width="300" alt="Angular Logo" [src]="course.iconUrl" />
+    </ng-content>
+
+    <ng-template #noImage>
+      <ng-container
+        *ngTemplateOutlet="
+          noImageTpl;
+          context: { description: course.description }
+        "
+      ></ng-container>
+    </ng-template>
 
     <div
       class="course-description"
