@@ -1,27 +1,33 @@
-<div class="top-menu">
-
-    <img class="logo"
-         src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
-
+<div highligthedEvent class="top-menu">
+  <img
+    class="logo"
+    alt="logo"
+    src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
+  />
 </div>
-
-
 
 <div class="courses" *ngIf="courses[0] as course">
+  <course-card
+    [highligthed]="true"
+    (courseSelected)="onCourseSelected($event)"
+    [course]="course"
+  >
+    <course-image [src]="course.iconUrl"></course-image>
 
-    <course-card
-            (courseSelected)="onCourseSelected($event)"
-                 [course]="course">
+    <div class="course-description">
+      {{ course.longDescription }}
+    </div>
+  </course-card>
 
-        <course-image [src]="course.iconUrl"></course-image>
+  <course-card
+    highligthedEvent
+    (toogleHighlight)="onChangeHighlighted($event)"
+    [course]="courses[3]"
+  ></course-card>
 
-        <div class="course-description">
-            {{ course.longDescription }}
-        </div>
-
-    </course-card>
-
-
+  <!-- Este componente invoca a la directiva directamente sin necesidad  de Input
+  <course-card 
+   [course]="courses[1]" 
+   highligthed>
+</course-card> -->
 </div>
-
-
