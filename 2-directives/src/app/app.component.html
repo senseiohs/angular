@@ -1,6 +1,7 @@
-<div class="top-menu">
+<div highligthedEvent class="top-menu">
   <img
     class="logo"
+    alt="logo"
     src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
   />
 </div>
@@ -17,6 +18,13 @@
       {{ course.longDescription }}
     </div>
   </course-card>
+
+  <course-card
+    highligthedEvent
+    (toogleHighlight)="onChangeHighlighted($event)"
+    [course]="courses[3]"
+  ></course-card>
+
   <!-- Este componente invoca a la directiva directamente sin necesidad  de Input
   <course-card 
    [course]="courses[1]" 

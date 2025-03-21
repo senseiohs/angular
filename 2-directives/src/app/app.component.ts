@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   QueryList,
-  ViewChild,
   ViewChildren,
 } from "@angular/core";
 import { COURSES } from "../db-data";
@@ -26,5 +25,9 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {}
 
-  onCourseSelected(course: Course) {}
+  onCourseSelected(course: Course): void {}
+
+  onChangeHighlighted(isHighligthed: boolean): void {
+    console.log(isHighligthed);
+  }
 }

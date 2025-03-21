@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CourseCardComponent } from "./course-card/course-card.component";
 import { CourseImageComponent } from "./course-image/course-image.component";
 import { HighligthedDirective } from "./directives/highligthed.directive";
+import { HighligthedEventDirective } from "./directives/highligthed-event.directive";
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { HighligthedDirective } from "./directives/highligthed.directive";
     CourseCardComponent,
     CourseImageComponent,
     HighligthedDirective,
+    HighligthedEventDirective,
   ],
   imports: [BrowserModule, BrowserAnimationsModule],
   providers: [],
