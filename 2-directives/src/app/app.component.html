@@ -6,32 +6,35 @@
   />
 </div>
 
-<div class="courses" *ngIf="courses[0] as course">
-  <course-card
-    [highligthed]="true"
-    #highlighter="hl"
-    (courseSelected)="onCourseSelected($event)"
-    [course]="course"
-  >
-    <course-image
-      *ngxUnless="!course.iconUrl"
-      [src]="course.iconUrl"
-    ></course-image>
+<div class="salmon-theme">
+  <div class="course-card">Test Card</div>
+  <div class="courses" *ngIf="courses[0] as course">
+    <course-card
+      [highligthed]="true"
+      #highlighter="hl"
+      (courseSelected)="onCourseSelected($event)"
+      [course]="course"
+    >
+      <course-image
+        *ngxUnless="!course.iconUrl"
+        [src]="course.iconUrl"
+      ></course-image>
 
-    <div class="course-description" (dblclick)="highlighter.toogleChange()">
-      {{ course.longDescription }}
-    </div>
-  </course-card>
+      <div class="course-description" (dblclick)="highlighter.toogleChange()">
+        {{ course.longDescription }}
+      </div>
+    </course-card>
 
-  <course-card
-    highligthedEvent
-    (toogleHighlight)="onChangeHighlighted($event)"
-    [course]="courses[3]"
-  ></course-card>
+    <course-card
+      highligthedEvent
+      (toogleHighlight)="onChangeHighlighted($event)"
+      [course]="courses[3]"
+    ></course-card>
 
-  <!-- Este componente invoca a la directiva directamente sin necesidad  de Input
+    <!-- Este componente invoca a la directiva directamente sin necesidad  de Input
   <course-card 
    [course]="courses[1]" 
    highligthed>
 </course-card> -->
+  </div>
 </div>
