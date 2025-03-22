@@ -2,6 +2,7 @@ import { Directive, Host, HostBinding, Input } from "@angular/core";
 
 @Directive({
   selector: "[highligthed]",
+  exportAs: "hl",
   standalone: false,
 })
 export class HighligthedDirective {
@@ -10,6 +11,10 @@ export class HighligthedDirective {
 
   constructor() {
     console.log("Hi from directive create");
+  }
+
+  toogleChange() {
+    this.isHighligthed = !this.isHighligthed;
   }
 
   // Utilizamos la propiedad de entrada Input
@@ -37,8 +42,8 @@ export class HighligthedDirective {
   // }
 
   //Esto nos sirve para setear directamente atributos del componente
-  @HostBinding("attr.disabled")
-  get disabled() {
-    return "true";
-  }
+  // @HostBinding("attr.disabled")
+  // get disabled() {
+  //   return "true";
+  // }
 }
