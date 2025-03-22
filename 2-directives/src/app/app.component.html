@@ -13,7 +13,10 @@
     (courseSelected)="onCourseSelected($event)"
     [course]="course"
   >
-    <course-image [src]="course.iconUrl"></course-image>
+    <course-image
+      *ngxUnless="!course.iconUrl"
+      [src]="course.iconUrl"
+    ></course-image>
 
     <div class="course-description" (dblclick)="highlighter.toogleChange()">
       {{ course.longDescription }}

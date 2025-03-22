@@ -7,6 +7,7 @@ import { CourseCardComponent } from "./course-card/course-card.component";
 import { CourseImageComponent } from "./course-image/course-image.component";
 import { HighligthedDirective } from "./directives/highligthed.directive";
 import { HighligthedEventDirective } from "./directives/highligthed-event.directive";
+import { NgxUnlessDirective } from "./directives/ngx-unless.directive";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { HighligthedEventDirective } from "./directives/highligthed-event.direct
     CourseImageComponent,
     HighligthedDirective,
     HighligthedEventDirective,
+    NgxUnlessDirective,
   ],
   imports: [BrowserModule, BrowserAnimationsModule],
   providers: [],
