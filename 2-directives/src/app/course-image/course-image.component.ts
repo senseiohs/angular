@@ -1,21 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 
 @Component({
-    selector: 'course-image',
-    templateUrl: './course-image.component.html',
-    styleUrls: ['./course-image.component.css'],
-    standalone: false
+  selector: "course-image",
+  templateUrl: "./course-image.component.html",
+  styleUrls: ["./course-image.component.css"],
+  standalone: false,
+  encapsulation: ViewEncapsulation.None,
 })
 export class CourseImageComponent implements OnInit {
+  @Input("src")
+  imageUrl: string;
 
-  @Input('src')
-  imageUrl:string;
+  constructor() {}
 
-
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
