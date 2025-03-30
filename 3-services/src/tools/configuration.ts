@@ -13,4 +13,7 @@ export const APP_CONFIG: AppConfig = {
 };
 
 //Token para la inyección de dependencias
-export const CONFIG_TOKEN = new InjectionToken<AppConfig>("CONFIG_TOKEN");
+export const CONFIG_TOKEN = new InjectionToken<AppConfig>("CONFIG_TOKEN", {
+  providedIn: "root",
+  factory: () => APP_CONFIG,
+});
