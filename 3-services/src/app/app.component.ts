@@ -1,32 +1,35 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Inject,
-  InjectionToken,
-  OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-} from "@angular/core";
-import { COURSES } from "../db-data";
+import { Component, Inject, OnInit } from "@angular/core";
+
 import { Course } from "./model/course";
-import { CourseCardComponent } from "./course-card/course-card.component";
-import { HighlightedDirective } from "./directives/highlighted.directive";
 import { Observable } from "rxjs";
 import { CoursesService } from "./services/courses.service";
+import { APP_CONFIG, AppConfig, CONFIG_TOKEN } from "src/tools/configuration";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
   standalone: false,
+  providers: [
+    {
+      provide: CONFIG_TOKEN, // Esta inyección no es Tree-Shakeable
+      useFactory: () => APP_CONFIG, //Interface que inyecta la configuración
+    },
+  ],
 })
 export class AppComponent implements OnInit {
   courses$: Observable<Course[]>;
-
-  // Ya no necesitamos inyectar el token COURSES_SERVICE
-  constructor(private readonly coursesService: CoursesService) {}
+  constructor(
+    private readonly coursesService: CoursesService,
+    //Como no es una clase typescript que existe en ejecución, sino una interface que no existe
+    // se debe especificar el token
+    @Inject(CONFIG_TOKEN) private readonly appConfiguration: AppConfig
+  ) //inicializar en el constructor
+  {
+    // Como esta inyección no es Tree-Shakeable y la borramos del constructor y no utilizamos
+    // el console, igualmente la estara instanciando en el main.js, consumiendo memoria
+    console.log(appConfiguration);
+  }
 
   ngOnInit() {
     this.courses$ = this.coursesService.loadCourses();
