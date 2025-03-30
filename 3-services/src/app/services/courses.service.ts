@@ -4,7 +4,8 @@ import { Course } from "../model/course";
 import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root", //Tree-Shakeable:Esta propiedad indica que el servicio es singleton
+  //y se inyecta en la raíz de la aplicación
 })
 export class CoursesService {
   constructor(private readonly http: HttpClient) {}
