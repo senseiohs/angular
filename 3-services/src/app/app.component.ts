@@ -1,44 +1,29 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Inject,
-  InjectionToken,
-  OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-} from "@angular/core";
-import { COURSES } from "../db-data";
+import { Component, Inject, OnInit } from "@angular/core";
+
 import { Course } from "./model/course";
-import { CourseCardComponent } from "./course-card/course-card.component";
-import { HighlightedDirective } from "./directives/highlighted.directive";
 import { Observable } from "rxjs";
 import { CoursesService } from "./services/courses.service";
+import { AppConfig, CONFIG_TOKEN } from "src/tools/configuration";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
   standalone: false,
-  providers: [
-    {
-      provide: CoursesService, // Con la clase ya no necesitamos la funcion courseServiceProvider
-      useClass: CoursesService, // Con esto ya no necesitamos el token COURSES_SERVICE
-    },
-  ],
 })
 export class AppComponent implements OnInit {
   courses$: Observable<Course[]>;
-
-  // Ya no necesitamos inyectar el token COURSES_SERVICE
-  constructor(private readonly coursesService: CoursesService) {}
-
+  constructor(
+    private readonly coursesServiceFather: CoursesService,
+    @Inject(CONFIG_TOKEN) private readonly config: AppConfig
+  ) {
+    console.log(config);
+  }
   ngOnInit() {
-    this.courses$ = this.coursesService.loadCourses();
+    this.courses$ = this.coursesServiceFather.loadCourses();
   }
 
   OnSave(course: Course) {
-    this.coursesService.UpdateCourse(course);
+    this.coursesServiceFather.UpdateCourse(course);
   }
 }
