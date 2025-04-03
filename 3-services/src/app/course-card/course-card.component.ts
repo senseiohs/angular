@@ -5,6 +5,7 @@ import {
   OnInit,
   Output,
   Self,
+  SkipSelf,
 } from "@angular/core";
 import { Course } from "../model/course";
 import { CoursesService } from "../services/courses.service";
@@ -26,7 +27,10 @@ export class CourseCardComponent implements OnInit {
   @Output("courseChanged")
   courseEmitter = new EventEmitter<Course>();
 
-  constructor(@Self() private readonly coursesServicePrivate: CoursesService) {}
+  //SkipSelf dice que no tome el provider local del servicio, sino el del padre
+  constructor(
+    @SkipSelf() private readonly coursesServicePrivate: CoursesService
+  ) {}
 
   ngOnInit() {
     const courses = this.coursesServicePrivate.loadCourses();
