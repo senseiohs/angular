@@ -1,24 +1,20 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   Component,
-  ContentChildren,
-  ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
-  QueryList,
-  ViewEncapsulation,
+  Self,
 } from "@angular/core";
 import { Course } from "../model/course";
-import { CourseImageComponent } from "../course-image/course-image.component";
+import { CoursesService } from "../services/courses.service";
 
 @Component({
   selector: "course-card",
   templateUrl: "./course-card.component.html",
   styleUrls: ["./course-card.component.css"],
   standalone: false,
+  providers: [CoursesService],
 })
 export class CourseCardComponent implements OnInit {
   @Input()
@@ -30,9 +26,11 @@ export class CourseCardComponent implements OnInit {
   @Output("courseChanged")
   courseEmitter = new EventEmitter<Course>();
 
-  constructor() {}
+  constructor(@Self() private readonly coursesServicePrivate: CoursesService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const courses = this.coursesServicePrivate.loadCourses();
+  }
 
   onSaveClicked(description: string) {
     this.courseEmitter.emit({ ...this.course, description });

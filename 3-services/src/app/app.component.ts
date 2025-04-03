@@ -14,16 +14,16 @@ import { AppConfig, CONFIG_TOKEN } from "src/tools/configuration";
 export class AppComponent implements OnInit {
   courses$: Observable<Course[]>;
   constructor(
-    private readonly coursesService: CoursesService,
+    private readonly coursesServiceFather: CoursesService,
     @Inject(CONFIG_TOKEN) private readonly config: AppConfig
   ) {
     console.log(config);
   }
   ngOnInit() {
-    this.courses$ = this.coursesService.loadCourses();
+    this.courses$ = this.coursesServiceFather.loadCourses();
   }
 
   OnSave(course: Course) {
-    this.coursesService.UpdateCourse(course);
+    this.coursesServiceFather.UpdateCourse(course);
   }
 }
