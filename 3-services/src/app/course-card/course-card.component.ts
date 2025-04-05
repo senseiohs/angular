@@ -17,7 +17,6 @@ import { CoursesService } from "../services/courses.service";
   styleUrls: ["./course-card.component.css"],
   standalone: false,
   providers: [CoursesService],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseCardComponent implements OnInit {
   @Input()
@@ -35,7 +34,7 @@ export class CourseCardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const courses = this.coursesServicePrivate.loadCourses();
+    // const courses = this.coursesServicePrivate.loadCourses();
   }
 
   OnTitleChanges(newTitle: string): void {

@@ -1,19 +1,28 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from "@angular/core";
 
 import { Course } from "./model/course";
 import { CoursesService } from "./services/courses.service";
 import { AppConfig, CONFIG_TOKEN } from "src/tools/configuration";
-import { COURSES } from "src/db-data";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  // courses$: Observable<Course[]>;
-  courses = COURSES;
+  //This declaration and asignation don't working
+  // courses: Course[];
+
+  //This way to we need load data with OnPush
+  courses$: Observable<Course[]>;
 
   constructor(
     private readonly coursesServiceFather: CoursesService,
@@ -22,15 +31,18 @@ export class AppComponent implements OnInit {
     console.log(config);
   }
   ngOnInit() {
-    // this.courses$ = this.coursesServiceFather.loadCourses();
+    //This way don't working with OnPush
+    // this.coursesServiceFather.loadCourses().subscribe({
+    //   next: (response) => {
+    //     this.courses = response;
+    //   },
+    // });
+
+    //This way to working with OnPush
+    this.courses$ = this.coursesServiceFather.loadCourses();
   }
 
-  OnEditTitleCourse() {
-    const course = this.courses[0];
-    const newCourse: any = { ...course };
-    newCourse.description = "New Value!";
-    this.courses[0] = newCourse;
-  }
+  OnEditTitleCourse() {}
 
   OnSave(course: Course) {
     this.coursesServiceFather.UpdateCourse(course);

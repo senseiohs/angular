@@ -2,6 +2,7 @@
   <img
     class="logo"
     src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
+    alt="Logo Enterprices"
   />
 </div>
 
@@ -9,7 +10,8 @@
   <div class="demo">
     <button (click)="OnEditTitleCourse()">Edit Course</button>
   </div>
-  <div class="courses">
+  <!-- We need to use async pipe when OnPush is activated -->
+  <div class="courses" *ngIf="courses$ | async as courses">
     <course-card
       *ngFor="let course of courses"
       [course]="course"
