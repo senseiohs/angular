@@ -6,7 +6,10 @@
 </div>
 
 <div>
-  <div class="courses" *ngIf="courses$ | async as courses">
+  <div class="demo">
+    <button (click)="OnEditTitleCourse()">Edit Course</button>
+  </div>
+  <div class="courses">
     <course-card
       *ngFor="let course of courses"
       [course]="course"
