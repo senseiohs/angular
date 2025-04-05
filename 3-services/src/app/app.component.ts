@@ -18,6 +18,8 @@ import { AppConfig, CONFIG_TOKEN } from "src/tools/configuration";
   standalone: false,
   changeDetection: ChangeDetectionStrategy.OnPush, //Debemos declarar changeDetectionStrategy.OnPush
 })
+
+//Implementamos DoCheck
 export class AppComponent implements OnInit, DoCheck {
   courses: Course[];
   loaded = false;
@@ -25,9 +27,20 @@ export class AppComponent implements OnInit, DoCheck {
   constructor(
     private readonly coursesServiceFather: CoursesService,
     @Inject(CONFIG_TOKEN) private readonly config: AppConfig,
-    private cd: ChangeDetectorRef
+    private readonly cd: ChangeDetectorRef //Declaramos la DI del changeDetector
   ) {}
 
+  ngOnInit() {
+    this.coursesServiceFather.loadCourses().subscribe({
+      next: (response) => {
+        this.courses = response;
+        this.cd.markForCheck(); //Avisamos que se debe revisar los cambios
+        this.loaded = true;
+      },
+    });
+  }
+
+  //Definimos el método de  los cambios
   ngDoCheck(): void {
     console.log("ngDoCheck()");
 
@@ -37,14 +50,6 @@ export class AppComponent implements OnInit, DoCheck {
       console.log("called cd.markForCheck()");
       this.loaded = undefined;
     }
-  }
-
-  ngOnInit() {
-    this.coursesServiceFather.loadCourses().subscribe((response) => {
-      this.courses = response;
-      this.cd.markForCheck();
-      // this.loaded = true;
-    });
   }
 
   OnEditTitleCourse() {}

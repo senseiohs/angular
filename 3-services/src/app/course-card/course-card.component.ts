@@ -27,7 +27,10 @@ export class CourseCardComponent implements OnInit {
   @Output("courseChanged")
   courseEmitter = new EventEmitter<Course>();
 
-  constructor(@Attribute("type") type: string, private cd: ChangeDetectorRef) {}
+  constructor(
+    @Attribute("type") type: string,
+    private readonly cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {}
 
