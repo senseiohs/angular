@@ -1,16 +1,12 @@
 import {
   Attribute,
-  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
   OnInit,
   Output,
-  Self,
-  SkipSelf,
 } from "@angular/core";
 import { Course } from "../model/course";
-import { CoursesService } from "../services/courses.service";
 
 @Component({
   selector: "course-card",
@@ -28,13 +24,7 @@ export class CourseCardComponent implements OnInit {
   @Output("courseChanged")
   courseEmitter = new EventEmitter<Course>();
 
-  //This property changes not with the time
-  // @Input()
-  // Type;
-
-  constructor(@Attribute("type") type: string) {
-    console.log(type);
-  }
+  constructor(@Attribute("type") type: string) {}
 
   ngOnInit() {}
 

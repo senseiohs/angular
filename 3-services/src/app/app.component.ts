@@ -8,7 +8,6 @@ import {
 import { Course } from "./model/course";
 import { CoursesService } from "./services/courses.service";
 import { AppConfig, CONFIG_TOKEN } from "src/tools/configuration";
-import { Observable } from "rxjs";
 
 @Component({
   selector: "app-root",
@@ -18,28 +17,17 @@ import { Observable } from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  //This declaration and asignation don't working
-  // courses: Course[];
-
-  //This way to we need load data with OnPush
-  courses$: Observable<Course[]>;
+  courses: Course[];
 
   constructor(
     private readonly coursesServiceFather: CoursesService,
     @Inject(CONFIG_TOKEN) private readonly config: AppConfig
-  ) {
-    console.log(config);
-  }
-  ngOnInit() {
-    //This way don't working with OnPush
-    // this.coursesServiceFather.loadCourses().subscribe({
-    //   next: (response) => {
-    //     this.courses = response;
-    //   },
-    // });
+  ) {}
 
-    //This way to working with OnPush
-    this.courses$ = this.coursesServiceFather.loadCourses();
+  ngOnInit() {
+    this.coursesServiceFather
+      .loadCourses()
+      .subscribe((response) => (this.courses = response));
   }
 
   OnEditTitleCourse() {}
