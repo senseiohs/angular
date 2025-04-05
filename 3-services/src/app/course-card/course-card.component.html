@@ -6,7 +6,12 @@
   <ng-content select="course-image" *ngIf="course.iconUrl"></ng-content>
 
   <div class="course-description">
-    Edit Title: <input #courseTitle [value]="course.description" />
+    Edit Title:
+    <input
+      #courseTitle
+      [value]="course.description"
+      (keyup)="OnTitleChanges(courseTitle.value)"
+    />
   </div>
 
   <div class="course-category" [ngSwitch]="course.category">

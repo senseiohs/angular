@@ -2,16 +2,21 @@
   <img
     class="logo"
     src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
+    alt="Logo Enterprices"
   />
 </div>
 
 <div>
-  <div class="courses" *ngIf="courses$ | async as courses">
+  <div class="demo">
+    <button (click)="OnEditTitleCourse()">Edit Course</button>
+  </div>
+  <!-- We need to use async pipe when OnPush is activated -->
+  <div class="courses">
     <course-card
       *ngFor="let course of courses"
       [course]="course"
+      type="Begginer"
       (courseChanged)="OnSave($event)"
-      highlighted
     >
       <course-image [src]="course.iconUrl"></course-image>
     </course-card>

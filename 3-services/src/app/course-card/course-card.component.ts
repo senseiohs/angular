@@ -1,21 +1,21 @@
 import {
+  Attribute,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
   OnInit,
   Output,
-  Self,
-  SkipSelf,
 } from "@angular/core";
 import { Course } from "../model/course";
-import { CoursesService } from "../services/courses.service";
 
 @Component({
   selector: "course-card",
   templateUrl: "./course-card.component.html",
   styleUrls: ["./course-card.component.css"],
   standalone: false,
-  providers: [CoursesService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseCardComponent implements OnInit {
   @Input()
@@ -27,13 +27,15 @@ export class CourseCardComponent implements OnInit {
   @Output("courseChanged")
   courseEmitter = new EventEmitter<Course>();
 
-  //SkipSelf dice que no tome el provider local del servicio, sino el del padre
   constructor(
-    @SkipSelf() private readonly coursesServicePrivate: CoursesService
+    @Attribute("type") type: string,
+    private readonly cd: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
-    const courses = this.coursesServicePrivate.loadCourses();
+  ngOnInit() {}
+
+  OnTitleChanges(newTitle: string): void {
+    this.course.description = newTitle;
   }
 
   onSaveClicked(description: string) {
