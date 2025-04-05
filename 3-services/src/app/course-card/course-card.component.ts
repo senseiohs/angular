@@ -1,4 +1,5 @@
 import {
+  Attribute,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -16,7 +17,6 @@ import { CoursesService } from "../services/courses.service";
   templateUrl: "./course-card.component.html",
   styleUrls: ["./course-card.component.css"],
   standalone: false,
-  providers: [CoursesService],
 })
 export class CourseCardComponent implements OnInit {
   @Input()
@@ -28,14 +28,15 @@ export class CourseCardComponent implements OnInit {
   @Output("courseChanged")
   courseEmitter = new EventEmitter<Course>();
 
-  //SkipSelf dice que no tome el provider local del servicio, sino el del padre
-  constructor(
-    @SkipSelf() private readonly coursesServicePrivate: CoursesService
-  ) {}
+  //This property changes not with the time
+  // @Input()
+  // Type;
 
-  ngOnInit() {
-    // const courses = this.coursesServicePrivate.loadCourses();
+  constructor(@Attribute("type") type: string) {
+    console.log(type);
   }
+
+  ngOnInit() {}
 
   OnTitleChanges(newTitle: string): void {
     this.course.description = newTitle;
