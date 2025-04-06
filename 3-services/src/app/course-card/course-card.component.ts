@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
 } from "@angular/core";
@@ -14,7 +15,7 @@ import { Course } from "../model/course";
   styleUrls: ["./course-card.component.css"],
   standalone: false,
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent implements OnInit, OnDestroy {
   @Input()
   course: Course;
 
@@ -24,9 +25,24 @@ export class CourseCardComponent implements OnInit {
   @Output("courseChanged")
   courseEmitter = new EventEmitter<Course>();
 
-  constructor(@Attribute("type") type: string) {}
+  constructor(@Attribute("type") type: string) {
+    console.log(`Constructor => This is courses value: `, this.course);
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("ngOnInit => This is courses value: ", this.course);
+    //Sometimes we need initialize some data to the component,like call service endpoint to load data from
+    //backend. This is the correct place.
+    // this.coursesServiceFather.loadCourses().subscribe({
+    //   next: (courses) =>{
+    //     this.courses = courses;
+    //   }
+    // });
+  }
+
+  ngOnDestroy(): void {
+    console.log("ngOnDestroy call...");
+  }
 
   OnTitleChanges(newTitle: string): void {
     this.course.description = newTitle;
