@@ -26,7 +26,14 @@ export class AppComponent implements OnInit {
   OnEditTitleCourse(): void {
     //Vamos a eliminar los cursos por lo tanto el card-component ocultara
     // la tarjeta y se lanzara el evento onDestroy()
-    this.courses = [undefined];
+    // this.courses = [undefined];
+
+    //Lets changes course object reference, to launch OnChanges event into card-component
+    let newCourse = {
+      ...this.courses[0],
+      description: "ngOnChanges()",
+    };
+    this.courses[0] = newCourse;
   }
 
   OnSave(course: Course): void {
