@@ -31,6 +31,7 @@ export class CourseCardComponent implements OnInit, OnDestroy, OnChanges {
     console.log(`Constructor => This is courses value: `, this.course);
   }
 
+  //The parameter "changes" let me know the object state both current and previously
   ngOnChanges(changes: SimpleChanges): void {
     console.log("ngOnChanges", changes);
   }
