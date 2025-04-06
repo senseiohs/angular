@@ -1,5 +1,6 @@
 import {
   AfterContentChecked,
+  AfterViewChecked,
   Attribute,
   Component,
   EventEmitter,
@@ -19,7 +20,12 @@ import { Course } from "../model/course";
   standalone: false,
 })
 export class CourseCardComponent
-  implements OnInit, OnDestroy, OnChanges, AfterContentChecked
+  implements
+    OnInit,
+    OnDestroy,
+    OnChanges,
+    AfterContentChecked,
+    AfterViewChecked
 {
   @Input()
   course: Course;
@@ -32,6 +38,12 @@ export class CourseCardComponent
 
   constructor(@Attribute("type") type: string) {
     console.log(`Constructor => This is courses value: `, this.course);
+  }
+
+  ngAfterViewChecked(): void {
+    console.log("ngAfterViewChecked");
+    //Acá  Es ideal para realizar operaciones comunes del DOM, como desplazarse
+    //al final de una lista o fijar el foco en un elemento determinado, etc.
   }
 
   //ESto se ejecuta cada vez que hay un cambio en nuestro componente
