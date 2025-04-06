@@ -1,8 +1,11 @@
 import {
   AfterContentChecked,
+  AfterContentInit,
   AfterViewChecked,
+  AfterViewInit,
   Attribute,
   Component,
+  DoCheck,
   EventEmitter,
   Input,
   OnChanges,
@@ -25,7 +28,10 @@ export class CourseCardComponent
     OnDestroy,
     OnChanges,
     AfterContentChecked,
-    AfterViewChecked
+    AfterViewChecked,
+    AfterContentInit,
+    AfterViewInit,
+    DoCheck
 {
   @Input()
   course: Course;
@@ -38,6 +44,16 @@ export class CourseCardComponent
 
   constructor(@Attribute("type") type: string) {
     console.log(`Constructor => This is courses value: `, this.course);
+  }
+
+  ngDoCheck(): void {
+    console.log("ngDoCheck...");
+  }
+  ngAfterViewInit(): void {
+    console.log("ngAfterViewInit...");
+  }
+  ngAfterContentInit(): void {
+    console.log("ngAfterContentIni...");
   }
 
   ngAfterViewChecked(): void {
