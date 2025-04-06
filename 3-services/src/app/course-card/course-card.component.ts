@@ -1,4 +1,5 @@
 import {
+  AfterContentChecked,
   Attribute,
   Component,
   EventEmitter,
@@ -17,7 +18,9 @@ import { Course } from "../model/course";
   styleUrls: ["./course-card.component.css"],
   standalone: false,
 })
-export class CourseCardComponent implements OnInit, OnDestroy, OnChanges {
+export class CourseCardComponent
+  implements OnInit, OnDestroy, OnChanges, AfterContentChecked
+{
   @Input()
   course: Course;
 
@@ -29,6 +32,18 @@ export class CourseCardComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(@Attribute("type") type: string) {
     console.log(`Constructor => This is courses value: `, this.course);
+  }
+
+  //ESto se ejecuta cada vez que hay un cambio en nuestro componente
+  //por lo tanto se debe tener cuidado con llamar a backend o largos calculos
+  ngAfterContentChecked(): void {
+    console.log("ngAfterContentChecked...");
+    this.course.description = "ngAfterContentChecked";
+    this.course.category = "ADVANCED";
+
+    //This modification working not, because property is of component internal (card-image)
+    //we see in console error throw
+    //this.course.iconUrl = '';
   }
 
   //The parameter "changes" let me know the object state both current and previously
