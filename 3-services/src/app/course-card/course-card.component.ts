@@ -1,7 +1,5 @@
 import {
   Attribute,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -15,7 +13,6 @@ import { Course } from "../model/course";
   templateUrl: "./course-card.component.html",
   styleUrls: ["./course-card.component.css"],
   standalone: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseCardComponent implements OnInit {
   @Input()
@@ -27,10 +24,7 @@ export class CourseCardComponent implements OnInit {
   @Output("courseChanged")
   courseEmitter = new EventEmitter<Course>();
 
-  constructor(
-    @Attribute("type") type: string,
-    private readonly cd: ChangeDetectorRef
-  ) {}
+  constructor(@Attribute("type") type: string) {}
 
   ngOnInit() {}
 
