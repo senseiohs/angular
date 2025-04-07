@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from "@angular/core";
 
 import { Course } from "./model/course";
-import { CoursesService } from "./services/courses.service";
 import { AppConfig, CONFIG_TOKEN } from "src/tools/configuration";
 import { COURSES } from "src/db-data";
+import { CoursesService } from "./courses/services/courses.service";
 
 @Component({
   selector: "app-root",

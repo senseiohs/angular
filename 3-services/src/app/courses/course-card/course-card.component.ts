@@ -14,7 +14,7 @@ import {
   Output,
   SimpleChanges,
 } from "@angular/core";
-import { Course } from "../model/course";
+import { Course } from "src/app/model/course";
 
 @Component({
   selector: "course-card",

@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Course } from "../model/course";
+
 import { Observable } from "rxjs";
+import { Course } from "src/app/model/course";
 
 @Injectable({
   providedIn: "root", //Tree-Shakeable:Esta propiedad indica que el servicio es singleton
