@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
     //   description: "ngOnChanges()",
     // };
     // this.courses[0] = newCourse;
+    this.courses[2].category = "BEGINNER";
   }
 
   OnSave(course: Course): void {
