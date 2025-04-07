@@ -11,8 +11,9 @@
     <button (click)="OnEditTitleCourse()">Edit Course</button>
   </div>
   <!-- We need to use async pipe when OnPush is activated -->
-  <div class="courses" *ngIf="courses[0] as course">
+  <div class="courses">
     <course-card
+      *ngFor="let course of courses | CourseFilterByCatergory : 'ADVANCED'"
       [course]="course"
       type="Begginer"
       (courseChanged)="OnSave($event)"

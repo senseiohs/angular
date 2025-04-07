@@ -66,8 +66,8 @@ export class CourseCardComponent
   //por lo tanto se debe tener cuidado con llamar a backend o largos calculos
   ngAfterContentChecked(): void {
     console.log("ngAfterContentChecked...");
-    this.course.description = "ngAfterContentChecked";
-    this.course.category = "ADVANCED";
+    // this.course.description = "ngAfterContentChecked";
+    // this.course.category = "ADVANCED";
 
     //This modification working not, because property is of component internal (card-image)
     //we see in console error throw
