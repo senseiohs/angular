@@ -11,6 +11,9 @@
     <button (click)="OnEditTitleCourse()">Edit Course</button>
   </div>
   <!-- We need to use async pipe when OnPush is activated -->
+
+  <!-- Esto se cargara bajo cuerda por alguna necesidad requerida de la aplicacion -->
+  @defer {
   <div class="courses">
     <course-card
       *ngFor="let course of courses"
@@ -21,4 +24,15 @@
       <course-image [src]="course.iconUrl"></course-image>
     </course-card>
   </div>
+  }
+
+  <!-- Esta sección es la que se muestra mientras se carga lo que esta en la parte del defer  -->
+  @placeholder {
+  <h2>This is the placeholder!!</h2>
+  }
+
+  <!-- Se muestra el loading mientras carga el @defer  -->
+  @loading(minimum 3s; after 1s) {
+  <h2>Loading...</h2>
+  }
 </div>
