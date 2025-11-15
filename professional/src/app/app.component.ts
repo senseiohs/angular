@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { CardComponent } from './card/card.component';
 import { Person } from './models/person';
-import { HydrateComponent } from './hydrate/hydrate.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CardComponent, HydrateComponent],
+  standalone: true,
+  imports: [RouterOutlet, CardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
