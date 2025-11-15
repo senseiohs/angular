@@ -1,12 +1,56 @@
+# Test Project Services in Angular 19
 
-##  Angular Core Deep Dive (Video Course)
+## What difference between PROMISE and OBSERVABLE?
+- Promise       => Promete que algo va a suceder aunque termine bien o mal
+- Observable    => Es un canal de comunicación al que nuestros componentes estan inscritos y observan el contenido que pasa por dicho canal.
 
-This repository contains the code of the [Angular Core Deep Dive](https://angular-university.io/course/angular-course).
 
-This course repository is updated to Angular v19:
+## Why RxJs is important for Angular
+RxJs esta metido en las entrañas de Angular porque me permite modificar y crear nuevas instancias de objetos con otros como por ejemplo observables, arrays, colecciones, etc. En dichos objetos puedo iterar con métodos como: 
+- pipe()
+- map()
 
-![Angular Core Deep Dive](https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png)
+## ADAPTERS
+Es una estructura basada en la clean architecture, la cual nos dice tenemos que tener adaptadores para poder comunicar la lógica interna de la aplicación con entidades externas (endpoints).
+Los adaptadores son nada más que funciones.
 
+```TypeScript
+import CurrencyRates from "../models/currency";
+
+export const CurrenciesAdapter = (currencyRates: CurrencyRates) => {
+  return currencyRates;
+};
+```
+
+# TakeUntilDestroyed
+Cuando se utiliza el **SUBSCRIBE** a la data de un servicio por lo general en el **constructor()** o en el **OnInit()**, resulta que este proceso lo que hace es estar ligado siempre a la respuesta de este servicio, por lo que si el objecto al que tenemos ligado el resultado se destruye esto se va a desatar en un problema de rendimiento, por lo que debemos de asegurarnos que si el objeto ligado se destruye, la subscripción también debe morir.
+
+```TypeScript
+export class AppComponent {  
+  private readonly ratesCurrenciesService = inject(CurrenciesService);
+  rates: CurrencyRates[] = [] as CurrencyRates[];
+  private readonly destroyRef = inject(DestroyRef);
+
+  constructor() {
+    this.ratesCurrenciesService
+      .listAllCurrencies()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((rates) => {
+        this.rates = rates as CurrencyRates[];
+        console.log("Rates with Adapter:", this.rates);
+      });
+  }
+}
+```
+## Alternativa - Pipe Async
+
+
+# ERROS
+## Cannot find name 'map'. Did you mean 'Map'?
+You only needed import map from rxj:
+```TypeScript
+import { map } from "rxjs/operators";
+```
 
 # Installation pre-requisites
 
@@ -19,17 +63,7 @@ With the following command the angular-cli will be installed globally in your ma
     npm install -g @angular/cli
 
 
-# How To install this repository
-
-We can install the master branch using the following commands:
-
-    git clone https://github.com/angular-university/angular-course.git
-
-This repository is made of several separate npm modules, that are installable separately. For example, to run the au-input module, we can do the following:
-
-    cd angular-course
-    npm install
-
+# How To install
 Its also possible to install the modules as usual using npm:
 
     npm install
@@ -54,23 +88,7 @@ To run the frontend part of our code, we will use the Angular CLI:
 
 The application is visible at port 4200: [http://localhost:4200](http://localhost:4200)
 
-
-
 # Important
-
-This repository has multiple branches, have a look at the beginning of each section to see the name of the branch.
-
-At certain points along the course, you will be asked to checkout other remote branches other than master. You can view all branches that you have available remotely using the following command:
-
-    git branch -a
-
-  The remote branches have their starting in origin, such as for example 1-navigation-and-containers.
-
-We can checkout the remote branch and start tracking it with a local branch that has the same name, by using the following command:
-
-      git checkout -b section-1 origin/1-navigation-and-containers
-
-It's also possible to download a ZIP file for a given branch,  using the branch dropdown on this page on the top left, and then selecting the Clone or Download / Download as ZIP button.
 
 # Other Courses
 
@@ -86,8 +104,6 @@ If you are looking for the [RxJs In Practice Course](https://angular-university.
 If you are looking for the [NgRx In Depth Course](https://angular-university.io/course/angular-ngrx-course), the repo with the full code can be found here:
 
 ![NgRx In Depth Course](https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-ngrx-course.png)
-
-
 
 # Angular PWA Course
 

@@ -1,22 +1,18 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
+  DestroyRef,
   Inject,
+  inject,
   InjectionToken,
   OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren,
 } from "@angular/core";
-import { COURSES } from "../db-data";
 import { Course } from "./model/course";
-import { CourseCardComponent } from "./course-card/course-card.component";
-import { HighlightedDirective } from "./directives/highlighted.directive";
 import { Observable } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { CoursesService } from "./services/courses.service";
 import { HttpClient } from "@angular/common/http";
-import { inject } from "@angular/core/testing";
+import { CurrenciesService } from "./services/currencies.service";
+import CurrencyRates from "./models/currency";
 
 //Factoria para crear el servicio de cursos
 // Este servicio se inyecta en el componente AppComponent
@@ -46,6 +42,9 @@ export const COURSES_SERVICE = new InjectionToken<CoursesService>(
 })
 export class AppComponent implements OnInit {
   courses$: Observable<Course[]>;
+  private readonly ratesCurrenciesService = inject(CurrenciesService);
+  rates: CurrencyRates[] = [] as CurrencyRates[];
+  private readonly destroyRef = inject(DestroyRef);
 
   //Inyectamos el servicio de cursos en el constructor utilizando el token COURSES_SERVICE
   // Esto permite que el servicio sea único y no se comparta entre diferentes instancias
@@ -53,7 +52,15 @@ export class AppComponent implements OnInit {
   // en el constructor del ChildComponent invocando al mismo token COURSES_SERVICE
   constructor(
     @Inject(COURSES_SERVICE) private readonly coursesService: CoursesService
-  ) {}
+  ) {
+    this.ratesCurrenciesService
+      .listAllCurrencies()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((rates) => {
+        this.rates = rates as CurrencyRates[];
+        console.log("Rates with Adapter:", this.rates);
+      });
+  }
 
   ngOnInit() {
     this.courses$ = this.coursesService.loadCourses();

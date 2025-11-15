@@ -11,7 +11,7 @@
       "tmpDir": "~/duffimcsohs",
       "reAttach": true,
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200",
+      "url": "http://localhost:4200/",
       "webRoot": "${workspaceFolder}"
     }
   ]
