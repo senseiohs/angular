@@ -5,9 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch Firefox",
       "type": "firefox",
       "request": "launch",
-      "name": "Launch localhost",
+      "tmpDir": "~/duffimcsohs",
+      "reAttach": true,
+      "preLaunchTask": "npm: start",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}"
     }
