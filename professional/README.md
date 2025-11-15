@@ -25,3 +25,55 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+# Tutorial Angular 19
+## Signal - LinkedSignal
+A property is linked for all run time of application another property value.
+
+```TypeScript
+@Component({ ... })
+export class AppComponent{
+	options = signal(['Pie','banana','coco']);
+	choice = linkedSignal(() => this.options()[0]);
+	
+	constructor() {    
+		console.log(this.choice());    
+		this.choice.set('watermelom');    
+		console.log(this.choice());    
+		this.options.set(['mango', 'peach', 'blueberry']);    
+		console.log(this.choice());  
+	}		
+}
+```
+## Resource
+This property we use for get data asyncron way from some service.
+```TypeScript
+@Component({ ... })
+export class AppComponent{
+	userId = input<number>();
+    userService = inject(UsersService);
+    user = resource({
+        request: () => this.userId(),
+        loader: async ({ request: id }) => await this.userService.getUser(id),
+    });
+	constructor() {	}		
+}
+```
+
+# Example code integration for markdown
+```json
+{
+    "person": {
+        "name": "SenseiOHS",
+        "age": 30,
+        "Profession": [
+            "Chef",
+            "Development"
+        ]
+    }
+}
+```
+# HV
+Esta es una documentación temporal
+`sensei$:> sudo apt search screenfetch`
+ 
