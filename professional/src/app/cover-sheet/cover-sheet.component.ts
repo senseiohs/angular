@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './cover-sheet.component.html',
-  styleUrl: './cover-sheet.component.scss'
+  styleUrl: './cover-sheet.component.scss',
 })
-export class CoverSheetComponent {
-
-}
+export class CoverSheetComponent {}
