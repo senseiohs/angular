@@ -1,0 +1,30 @@
+<div>
+  <div>
+    <p>Get Course of *ngif and async way</p>
+    <div class="courses" *ngIf="courses$ | async as courses">
+      <course-card
+        *ngFor="let course of courses"
+        [course]="course"
+        (courseChanged)="OnSave($event)"
+      >
+        <course-image [src]="course.iconUrl"></course-image>
+      </course-card>
+    </div>
+  </div>
+
+  <!-- <div>
+    <p>Get Course of ngif and let and async way</p>
+    @let listCourses = courses$ | async;
+    @if (listCourses) {
+    <div class="courses">
+      <course-card
+        *ngFor="let course of listCourses"
+        [course]="course"
+        (courseChanged)="OnSave($event)"
+      >
+        <course-image [src]="course.iconUrl"></course-image>
+      </course-card>
+    </div>
+    }
+  </div> -->
+</div>

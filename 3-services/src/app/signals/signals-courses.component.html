@@ -1,0 +1,15 @@
+<div>
+  <p>Get Course of ngif and let and async way</p>
+  @let coursesList = courses(); 
+  @if (coursesList) { 
+    @for (course of  coursesList; track course.id) {
+      <div class="courses">
+        <course-card [course]="course" (courseChanged)="OnSave($event)">
+          <course-image [src]="course.iconUrl"></course-image>
+        </course-card>
+      </div>
+    } 
+  } @else {
+    <div>Courses undefined yet</div>
+  }
+</div>

@@ -41,10 +41,10 @@ export const COURSES_SERVICE = new InjectionToken<CoursesService>(
   ],
 })
 export class AppComponent implements OnInit {
-  courses$: Observable<Course[]>;
   private readonly ratesCurrenciesService = inject(CurrenciesService);
-  rates: CurrencyRates[] = [] as CurrencyRates[];
   private readonly destroyRef = inject(DestroyRef);
+  courses$: Observable<Course[]>;
+  rates: CurrencyRates[] = [] as CurrencyRates[];
 
   //Inyectamos el servicio de cursos en el constructor utilizando el token COURSES_SERVICE
   // Esto permite que el servicio sea único y no se comparta entre diferentes instancias

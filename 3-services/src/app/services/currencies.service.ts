@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import CurrencyRates from "../models/currency";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
 import { RatesCurrenciesAdapter } from "../adapters/rates-currencies-adapter";
 
@@ -25,8 +25,10 @@ export class CurrenciesService {
   }
 
   listAllCurrencies(): Observable<CurrencyRates[]> {
-    return this.http
-      .get<CurrencyRates[]>(`${this.apiUrl}/all`)
-      .pipe(map((rates) => RatesCurrenciesAdapter(rates)));
+    // return this.http
+    //   .get<CurrencyRates[]>(`${this.apiUrl}/all`)
+    //   .pipe(map((rates) => RatesCurrenciesAdapter(rates)));
+    let listCurrencies: CurrencyRates[] = [];
+    return of(listCurrencies);
   }
 }

@@ -43,9 +43,31 @@ export class AppComponent {
 }
 ```
 ## Alternativa - Pipe Async
+Cuando vamos a a declarar una variable que va a obtener su valor en una operación asincrona, lo declaramos con el simbolo de '\$'\. Esto lo que hace es que el pipe async se subscribe y de desubscribe automaticamente.
+```TypeScript
+courses$: Observable<Course[]> = this.coursesService.loadCourses();
+```
+```html
+<div>
+  <p>Get Course of ngif and let and async way</p>
+  @let courses = courses$ | async; @if (courses$) {
+  <div class="courses">
+    <course-card
+      *ngFor="let course of courses"
+      [course]="course"
+      (courseChanged)="OnSave($event)"
+    >
+      <course-image [src]="course.iconUrl"></course-image>
+    </course-card>
+  </div>
+  }
+</div>
+```
+
+## SIGNALS is the best way
 
 
-# ERROS
+# ERROS ⚡
 ## Cannot find name 'map'. Did you mean 'Map'?
 You only needed import map from rxj:
 ```TypeScript
